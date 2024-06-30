@@ -1,0 +1,29 @@
+{
+  "name": "foodapp",
+  "version": "1.0.0",
+  "description": "FoodApp, Food Ordering App",
+  "main": "index.js",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "(https://github.com/guptaaa19/Food_App)"
+  },
+  "keywords": [
+    "Foodapp"
+  ],
+  "author": "Srishti",
+  "license": "ISC",
+  "devDependencies": {
+    "parcel": "^2.12.0",
+    "process": "^0.11.10"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.24.0"
+  }
+}
