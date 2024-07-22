@@ -1,66 +1,61 @@
-import RestaurantCard from "./ResturantCard";
-import { useState, useEffect } from "react";
+// src/components/Body.js
+
+import RestaurantCard from "./RestaurantCard";
 import Shimmer from "./Shimmer";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const Body = () => {
-    // Local state variables - super powerful
     const [listOfRestaurants, setListOfRestaurants] = useState([]);
     const [filteredRestaurants, setFilteredRestaurants] = useState([]);
-    const [ searchText, setSearchText ] = useState("");
-
-    // * Whenever a state variable updates or changes, react triggers a reconciliation cycle(re-renders the component)
-    console.log('Body rendered');
+    const [searchText, setSearchText] = useState("");
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        fetchData();
+        fetchData().finally(() => setLoading(false));
     }, []);
 
     const fetchData = async () => {
         try {
-            const data = await fetch(
-                "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9352403&lng=77.624532&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
-            );
+            const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+            const targetUrl = 'https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9352403&lng=77.624532&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING';
+            const response = await fetch(proxyUrl + targetUrl);
 
-            const json = await data.json();
-            console.log(json);
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
 
-            console.log(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
-
+            const json = await response.json();
             const fetchedRestaurants = json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
+
             if (fetchedRestaurants) {
                 setListOfRestaurants(fetchedRestaurants);
                 setFilteredRestaurants(fetchedRestaurants);
             }
-    } catch (error) {
+        } catch (error) {
             console.error("Failed to fetch data", error);
+            setListOfRestaurants([]);
         }
     };
 
-    //conditional rendering
-    // if(listOfRestaurants.length === 0){
-    //     return < Shimmer />;
-    // }
+    const handleSearch = () => {
+        const filteredRestaurant = listOfRestaurants.filter(
+            (res) => res.info.name.toLowerCase().includes(searchText.toLowerCase())
+        );
+        setFilteredRestaurants(filteredRestaurant);
+    };
 
-    return (listOfRestaurants.length === 0) ? < Shimmer /> :
-    (
+    return loading ? <Shimmer /> : (
         <div className="body">
             <div className="filter">
                 <div className="search">
-                    <input type = "text" className="search-box" value={searchText} // tied the value to an empty string
-                    onChange= { (e) => { setSearchText(e.target.value)
-                    }}/>
-                    <button onClick={() => {
-                        // Filter the restro-cards and update the UI
-                        // searchText
-                        console.log(searchText);
-                        const filteredRestaurant = listOfRestaurants.filter(
-                            (res) => res.info.name.toLowerCase().includes(searchText.toLocaleLowerCase())
-                        );
-                        setFilteredRestaurants(filteredRestaurant);
-                    }}>Search</button>
-                    {/* made the search case-sensitive */}
-
+                    <input
+                        type="text"
+                        className="search-box"
+                        value={searchText}
+                        onChange={(e) => setSearchText(e.target.value)}
+                    />
+                    <button onClick={handleSearch}>Search</button>
                 </div>
                 <button className="filter-btn" onClick={() => {
                     const filteredList = listOfRestaurants.filter(
@@ -72,14 +67,11 @@ const Body = () => {
                 </button>
             </div>
             <div className="res-container">
-                {/* Restaurant cards */}
-                {
-                    filteredRestaurants.map((restaurant) => (
-                        <Link key={restaurant.info.id} to = {"restuarants/" + restaurant.info.id }>
-                            <RestaurantCard  resData={restaurant} />
-                        </Link>
-                    ))
-                }
+                {filteredRestaurants.map((restaurant) => (
+                    <Link key={restaurant.info.id} to={"restaurants/" + restaurant.info.id}>
+                        <RestaurantCard resData={restaurant} />
+                    </Link>
+                ))}
             </div>
         </div>
     );
