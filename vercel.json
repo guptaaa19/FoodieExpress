@@ -1,12 +1,8 @@
 {
-  "name": "foodie-express-twmi",
   "builds": [
-    { "src": "index.html", "use": "@vercel/static-build" }
+    { "src": "package.json", "use": "@vercel/static-build" }
   ],
   "routes": [
     { "src": "/(.*)", "dest": "/index.html" }
-  ],
-  "installCommand": "npm install",
-  "buildCommand": "parcel build",
-  "outputDirectory": "dist"
+  ]
 }
