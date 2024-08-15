@@ -1,6 +1,6 @@
 // src/components/Body.js
 
-import ResturantCard from "./RestaurantCard";
+import ResturantCard from "./ResturantCard";
 import Shimmer from "./Shimmer";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
