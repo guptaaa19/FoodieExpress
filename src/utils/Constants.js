@@ -10,6 +10,10 @@ export const errorimg = "https://cdn2.vectorstock.com/i/1000x1000/82/41/404-erro
 
 // export const MENU_API = "https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=12.9352403&lng=77.624532&restaurantId=";
 
-export const MENU_API = "https://api.allorigins.win/get?url=" + encodeURIComponent("https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=12.9352403&lng=77.624532&restaurantId=${restaurantId}");
-
+// export const MENU_API = "https://api.allorigins.win/get?url=" + encodeURIComponent("https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=12.9352403&lng=77.624532&restaurantId=${restaurantId}");
+export const MENU_API = (restaurantId) =>
+  "https://api.allorigins.win/get?url=" +
+  encodeURIComponent(
+    `https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=12.9352403&lng=77.624532&restaurantId=${restaurantId}`
+  );
 // https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=12.9352403&lng=77.624532&restaurantId=387468
