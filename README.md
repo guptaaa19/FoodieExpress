@@ -1,2 +1,86 @@
-# hello to my food 
-# swiggy api used
+Setup Instructions:
+Clone the repository: [ git clone https://github.com/username/repository-name.git ]
+Navigate to the project directory: [ cd repository-name ]
+Install the dependencies: [ npm install ]
+Start the development server: [ npm start ]
+How to write code in parcel with git step by step
+git init
+git branch -M main
+git commit -m "episode-01"
+git remote add origin (copy paste from syntax from git)
+git push origin main -[1] npm init - package name: (namaste-react-practice) - version: (1.0.0) - description: This is namaste react practice - entry point: (app.js) - test command: jest - git repository: - keywords: react, namaste react, practice, akshay shaini
+author: Akshay saini - license: (ISC)
+[2] npm install -D parcel
+How to ignite app after installing parcel
+1. npx parcel index.html(source file: index.html)
+2. npm install react
+3. npm i react-dom
+4. When succesfully installed everythings then from package.json delete { "main": "App.js"}
+If error come then use this syntax
+npx parcel clean
+rm -rf .parcel-cache
+rm -rf dist
+rm -rf node_modules npm install
+npm update
+write minimal code
+npm install react react-dom
+npx parcel index.html
+Upload code from vs code steps:
+git add .
+git commit -m "updating"
+git push
+Parcel
+Dev Build
+Local Server
+HMR - Hot Module Replacement
+File Watching Algorithm , writtem in c++
+Caching - Faster Builds
+image Optimization
+Minification
+Bundling
+Compress
+Consistent Hahing
+Code Spliting
+Differential Bunding - support older browsers
+Diagnostic
+Error Handling
+HTTPs
+Tree shaking -remove unused code
+Different dev and prod bundle
+parcel (start project after modifying script)
+"scripts": { "start": "parcel index.html", "build":"parcel build index.html" },
+
+To start project Type: npm run start/ npm start
+
+To build project Type: npm run build
+
+Food Ordering App Namaste React
+Header -Logo -nav Items
+Body -Search Bar -RestaurentContainer -Restaurent Card
+Footer -copyright -Links -Address -Contact
+Two type of Export/Import
+Default Export/Import
+export default Components;
+import Components from "path"
+Named Export/Import
+export const Components
+import {Component} from "path";
+React Hooks
+(Normal js utilities functions)
+useState() - Superpowerful state variables in react
+useEfect() -
+2 types Routing in web apps
+Client Side Routing (If we are not calling API then is called Client side routing)
+Server Side Routing (if we are calling API then this can be called Server side Routing)
+These are same name
+Chunking | Code Spliting | dynamic-bundling | Lazy Loading | On-demand-loading
+(break down your website/app in smaller chunk)
+Redux Toolkit
+Install @reduxjs/toolkit and react-redux ( npm install @reduxjs/toolkit)
+Build our store
+Connect our store to our app
+Slice (cartSlice)
+dispatch(action)
+Selector
+React Redux
+npm i react-redux
