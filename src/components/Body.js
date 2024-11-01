@@ -21,53 +21,18 @@ const Body = () => {
     fetchData().finally(() => setLoading(false));
   }, []);
 
-  // const fetchData = async () => {
-  //   try {
-  //     const response = await fetch('https://api.allorigins.win/get?url=' + encodeURIComponent('https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9352403&lng=77.624532&is-seo-homepage-enabled=true'));
-         
-  //     if (!response.ok) {
-  //       throw new Error('Network response was not ok');
-  //     }
-  //     const json = await data.json();
-  //     const fetchedRestaurants =
-  //       json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
-
-  //     if (fetchedRestaurants) {
-  //       setListOfRestaurants(fetchedRestaurants);
-  //       setFilteredRestaurants(fetchedRestaurants);
-  //     }
-  //   } catch (error) {
-  //     console.error("Failed to fetch data", error);
-  //     setListOfRestaurants([]); // Ensure this is set to an empty array on error
-  //   }
-  // };
-
   const fetchData = async () => {
-    try {
-        const response = await fetch('https://api.allorigins.win/get?url=' + encodeURIComponent('https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9352403&lng=77.624532&is-seo-homepage-enabled=true'));
-
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-
+        const response = await fetch('https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9352403&lng=77.624532&is-seo-homepage-enabled=true');
         const json = await response.json(); // Fetch the JSON from the response
 
-        // The data is wrapped in a property named 'contents' by the allorigins service
-        const fetchedData = JSON.parse(json.contents); // Parse the 'contents' property
-
         const fetchedRestaurants =
-            fetchedData?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
+            json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
 
         if (fetchedRestaurants) {
             setListOfRestaurants(fetchedRestaurants);
             setFilteredRestaurants(fetchedRestaurants);
         }
-    } catch (error) {
-        console.error("Failed to fetch data", error);
-        setListOfRestaurants([]); // Ensure this is set to an empty array on error
-    }
 };
-
 
   // Handle search logic
   const handleSearch = () => {
